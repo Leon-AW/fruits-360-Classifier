@@ -31,7 +31,7 @@ You will need to download two versions for full functionality as described:
 1.  **Original Size:** The archive named something like `fruits-360_original_size.zip`.
 2.  **100x100 Pixels:** The archive named `fruits-360_dataset.zip` (this one contains the 100x100 images).
 
-See the "Detailed Dataset Download and Setup" section below for more specific instructions on all datasets.
+See step 6 in the "Setup and Installation" section (specifically, subsections 6.1, 6.2, and 6.3) below for detailed dataset download and setup instructions.
 
 ## 4. Setup and Installation
 
@@ -86,63 +86,77 @@ See the "Detailed Dataset Download and Setup" section below for more specific in
     pip install -r requirements.txt
     ```
 
-4.  **Download and Prepare Datasets:**
-    *   Download the "original size" and "100x100" versions of the Fruits-360 dataset from Kaggle (see section 3).
-    *   Unzip them into the `fruit_classifier_project/` directory as shown in the "Expected Dataset Directory Structure" above.
-        *   Ensure the folder from the "original size" archive is named `fruits-360-original-size`.
-        *   Ensure the folder from the "100x100" archive is named `fruits-360`.
+6.  **Detailed Dataset Download and Setup:**
+    For the system to function correctly with all training options, please download and organize the datasets as follows. It's recommended to perform these steps after cloning the project and setting up your virtual environment.
 
-5.  **Prepare Background Images:**
-    *   Create two folders inside `fruit_classifier_project/`:
-        *   `backgrounds`: For the original size (224x224) processing.
-        *   `backgrounds100x100`: For the 100x100 processing.
-    *   Place several `.jpg` or `.png` images into each of these folders. These will be used to replace the white backgrounds of the fruit images during training. The more varied, the better.
+    #### 6.1. Background Images (for 224x224 Augmentation)
 
-## 5. Detailed Dataset Download and Setup
+    *   **Purpose:** These images are used as backgrounds when augmenting the Fruits-360 original size dataset (processed at 224x224 pixels).
+    *   **Download Link:** [Cats vs Dogs Transformed (Kaggle)](https://www.kaggle.com/datasets/abhinavnayak/catsvdogs-transformed)
+        *   From this dataset, you can use the images as backgrounds.
+    *   **Target Directory:** After downloading, place the desired background images into:
+        ```
+        fruit_classifier_project/backgrounds/
+        ```
+        *Ensure these are image files (e.g., .jpg, .png).*
 
-For the system to function correctly with all training options, please download and organize the datasets as follows. It's recommended to perform these steps after cloning the project and setting up your virtual environment.
+    #### 6.2. Background Images (for 100x100 Augmentation)
 
-### 5.1. Background Images (for 224x224 Augmentation)
+    *   **Purpose:** These images are used as backgrounds when augmenting the Fruits-360 100x100 dataset.
+    *   **Download Link:** [Stanford Background Dataset (Kaggle)](https://www.kaggle.com/datasets/balraj98/stanford-background-dataset)
+    *   **Instructions:**
+        1.  Download the dataset, which will likely be a zip file.
+        2.  Unzip the archive.
+        3.  Locate the `images` folder within the unzipped contents.
+    *   **Target Directory:** Copy all images from the `images` folder into:
+        ```
+        fruit_classifier_project/backgrounds100x100/
+        ```
 
-*   **Purpose:** These images are used as backgrounds when augmenting the Fruits-360 original size dataset (processed at 224x224 pixels).
-*   **Download Link:** [Cats vs Dogs Transformed (Kaggle)](https://www.kaggle.com/datasets/abhinavnayak/catsvdogs-transformed)
-    *   From this dataset, you can use the images as backgrounds.
-*   **Target Directory:** After downloading, place the desired background images into:
+    #### 6.3. Fruits-360 Dataset (All Variants)
+
+    *   **Purpose:** This is the primary dataset for fruit classification.
+    *   **Main Download Link:** [Fruits-360 (Kaggle)](https://www.kaggle.com/datasets/moltean/fruits)
+    *   **Instructions:**
+        1.  Download the complete dataset from the Kaggle link. This usually comes as a single large archive (e.g., `archive.zip`).
+        2.  Unzip the main archive. Inside, you will find several sub-archives or folders.
+    *   **Target Directory Structure:** Unzip and place the relevant contents into the `fruit_classifier_project/` directory to match the following structure:
+        *   `fruit_classifier_project/fruits-360_original-size/` (Contains the original, higher-resolution images)
+        *   `fruit_classifier_project/fruits-360_100x100/` (Contains the 100x100 pixel images, often found in a sub-folder named `fruits-360` or `fruits-360_dataset` within the main download)
+        *   `fruit_classifier_project/fruits-360-3-body-problem/`
+        *   `fruit_classifier_project/fruits-360-meta/`
+        *   `fruit_classifier_project/fruits-360_multi/`
+
+        *Note: The original `README.md` might have referred to `fruits-360` for the 100x100 dataset. For clarity and to match the common naming from the "multi-variant" Kaggle download, we're using `fruits-360_100x100`. Please adjust your training scripts if they expect a different name for the 100x100 dataset folder.*
+
+        Ensure the `Training` and `Test` (or `Validation`) subdirectories are correctly placed within `fruits-360_original-size/` and `fruits-360_100x100/`.
+
+## 5. Getting Started
+
+### 5.1. Running the Smart Scale GUI Application (`smart_scale_tkinter_app.py`)
+
+This script launches a Tkinter-based GUI application that simulates a smart scale. It uses the webcam to identify fruits, allows adding them to a virtual cart, and provides features like item correction and language selection. This application typically relies on `config.py` for settings like model path and product data, and `translations.py` for multi-language support.
+
+*   **Default (using model and settings from `config.py`):**
+    ```bash
+    python fruit_classifier_project/smart_scale_tkinter_app.py
     ```
-    fruit_classifier_project/backgrounds/
+
+*   **Specify a Model:**
+    You can override the model specified in `config.py` by using the `--model` argument:
+    ```bash
+    python fruit_classifier_project/smart_scale_tkinter_app.py --model path/to/your_custom_model.keras
     ```
-    *Ensure these are image files (e.g., .jpg, .png).*
+    Replace `path/to/your_custom_model.keras` with the actual path to your desired Keras model file.
 
-### 5.2. Background Images (for 100x100 Augmentation)
-
-*   **Purpose:** These images are used as backgrounds when augmenting the Fruits-360 100x100 dataset.
-*   **Download Link:** [Stanford Background Dataset (Kaggle)](https://www.kaggle.com/datasets/balraj98/stanford-background-dataset)
-*   **Instructions:**
-    1.  Download the dataset, which will likely be a zip file.
-    2.  Unzip the archive.
-    3.  Locate the `images` folder within the unzipped contents.
-*   **Target Directory:** Copy all images from the `images` folder into:
-    ```
-    fruit_classifier_project/backgrounds100x100/
-    ```
-
-### 5.3. Fruits-360 Dataset (All Variants)
-
-*   **Purpose:** This is the primary dataset for fruit classification.
-*   **Main Download Link:** [Fruits-360 (Kaggle)](https://www.kaggle.com/datasets/moltean/fruits)
-*   **Instructions:**
-    1.  Download the complete dataset from the Kaggle link. This usually comes as a single large archive (e.g., `archive.zip`).
-    2.  Unzip the main archive. Inside, you will find several sub-archives or folders.
-*   **Target Directory Structure:** Unzip and place the relevant contents into the `fruit_classifier_project/` directory to match the following structure:
-    *   `fruit_classifier_project/fruits-360_original-size/` (Contains the original, higher-resolution images)
-    *   `fruit_classifier_project/fruits-360_100x100/` (Contains the 100x100 pixel images, often found in a sub-folder named `fruits-360` or `fruits-360_dataset` within the main download)
-    *   `fruit_classifier_project/fruits-360-3-body-problem/`
-    *   `fruit_classifier_project/fruits-360-meta/`
-    *   `fruit_classifier_project/fruits-360_multi/`
-
-    *Note: The original `README.md` might have referred to `fruits-360` for the 100x100 dataset. For clarity and to match the common naming from the "multi-variant" Kaggle download, we're using `fruits-360_100x100`. Please adjust your training scripts if they expect a different name for the 100x100 dataset folder.*
-
-    Ensure the `Training` and `Test` (or `Validation`) subdirectories are correctly placed within `fruits-360_original-size/` and `fruits-360_100x100/`.
+**Key Features (within the GUI):**
+*   Live camera feed for fruit identification.
+*   Button to scan and identify the item under the camera.
+*   Display of identified item, estimated weight, and price.
+*   Option to correct misclassifications.
+*   Virtual shopping cart to add items.
+*   Checkout simulation.
+*   Language selection for the GUI.
 
 ## 6. Git LFS Configuration for Contributors
 
@@ -161,7 +175,7 @@ When you contribute to this project, **your new model files and user data will a
 ### 🔍 Current LFS Tracking Rules
 
 The `.gitattributes` file contains these patterns:
-```
+```bash
 # Track all Keras models
 fruit_classifier_project/*.keras filter=lfs diff=lfs merge=lfs -text
 fruit_classifier_project/**/*.keras filter=lfs diff=lfs merge=lfs -text
@@ -208,8 +222,8 @@ fruit_detection_system/
 │   ├── fruits-360_multi/       # Multi-fruit dataset (see section 5.3)
 │   ├── fruits-360_3-body-problem/ # Specific test dataset (see section 5.3)
 │   ├── fruits-360_dataset_meta/ # DEPRECATED - now fruits-360-meta (see section 5.3)
-│   ├── backgrounds/            # Background images for 224x224 augmentation (see section 5.1)
-│   ├── backgrounds100x100/     # Background images for 100x100 augmentation (see section 5.2)
+│   ├── backgrounds/            # Background images for 224x224 augmentation (see section 4, step 6.1)
+│   ├── backgrounds100x100/     # Background images for 100x100 augmentation (see section 4, step 6.2)
 │   ├── user_corrected_data/    # Stores images saved via interactive feedback
 │   ├── train_fruit_classifier.py # Script for training/retraining the model
 │   ├── interactive_fruit_classifier.py # Script for interactive classification and feedback
@@ -307,3 +321,12 @@ This script provides a continuous real-time classification of fruits from the we
     ```
 
 *   **With Options (same as `interactive_fruit_classifier.py`
+
+## 9. Potential Future Improvements
+
+*   More sophisticated data augmentation techniques.
+*   Allow fine-tuning of later layers in the MobileNetV2 base model after initial training.
+*   Develop a more user-friendly GUI (e.g., using Tkinter, PyQt, or a web interface).
+*   Experiment with other efficient model architectures (e.g., EfficientNet).
+*   Implement object detection (drawing bounding boxes around fruits) instead of full-frame classification for scenarios with multiple fruits or cluttered backgrounds.
+*   Add options for adjusting confidence thresholds for display. 
