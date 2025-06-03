@@ -1,0 +1,17 @@
+# Keras models - track all .keras files in the project directory
+fruit_classifier_project/*.keras filter=lfs diff=lfs merge=lfs -text
+# Also track any keras files in subdirectories
+fruit_classifier_project/**/*.keras filter=lfs diff=lfs merge=lfs -text
+# Specific large image files
+# fruit_classifier_project/sample_augmented_batch.png filter=lfs diff=lfs merge=lfs -text
+# Track all files within these directories
+# fruit_classifier_project/user_corrected_data/** filter=lfs diff=lfs merge=lfs -text
+# fruit_classifier_project/backgrounds/** filter=lfs diff=lfs merge=lfs -text
+# fruit_classifier_project/backgrounds100x100/** filter=lfs diff=lfs merge=lfs -text
+# fruit_classifier_project/fruits-360_3-body-problem/** filter=lfs diff=lfs merge=lfs -text
+# fruit_classifier_project/fruits-360_100x100/** filter=lfs diff=lfs merge=lfs -text
+# fruit_classifier_project/fruits-360_dataset_meta/** filter=lfs diff=lfs merge=lfs -text
+# fruit_classifier_project/fruits-360_multi/** filter=lfs diff=lfs merge=lfs -text
+# fruit_classifier_project/fruits-360_original-size/** filter=lfs diff=lfs merge=lfs -text
+fruit_classifier_project/user_corrected_data/**/*.png filter=lfs diff=lfs merge=lfs -text
+*.keras filter=lfs diff=lfs merge=lfs -text

@@ -1,0 +1,63 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual Environment
+fruit_detector/
+fruit_detector2/
+
+# OS-specific
+.DS_Store
+Thumbs.db
+*.crdownload
+
+# IDE / Editor specific (common examples)
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Other project folders to ignore
+HCI-SmartScale/
+
+# Datasets & Large Files
+archive.zip
+
+# Trained Models
+fruit_classifier_project/*.keras
+!fruit_classifier_project/fruit_classifier_mobilenet_best_v1.keras
+!fruit_classifier_project/fruit_classifier_mobilenet_best_v2.keras
+fruit_classifier_project/*.h5
+
+# Output files from training/visualization
+fruit_classifier_project/sample_augmented_batch.png
+
+# Jupyter Notebook Checkpoints
+.ipynb_checkpoints/
+
+# TensorFlow / Keras logs (if you use TensorBoard)
+logs/
+.tensorboard/
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
+
+# User-uploaded data (if any, besides what's specified)
+# e.g. uploads/
+
+# Secrets or config files that shouldn't be in repo
+# e.g. *.env
+# e.g. config.ini (if it contains secrets)
+
+# Ignore dataset and background image folders
+fruit_classifier_project/backgrounds
+fruit_classifier_project/backgrounds100x100
+fruit_classifier_project/fruits-360-3-body-problem
+fruit_classifier_project/fruits-360_100x100
+fruit_classifier_project/fruits-360-meta
+fruit_classifier_project/fruits-360_multi
+fruit_classifier_project/fruits-360-original-size
